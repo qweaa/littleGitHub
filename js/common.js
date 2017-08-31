@@ -6,6 +6,32 @@ Number.prototype.profixZero = function(n){
 	}
 }
 
+//Function.prototype.bind()
+if (!Function.prototype.bind) {
+  Function.prototype.bind = function (oThis) {
+    if (typeof this !== &quot;function&quot;) {
+      // closest thing possible to the ECMAScript 5 internal IsCallable function
+      throw new TypeError(&quot;Function.prototype.bind - what is trying to be bound is not callable&quot;);
+    }
+ 
+    var aArgs = Array.prototype.slice.call(arguments, 1), 
+        fToBind = this, 
+        fNOP = function () {},
+        fBound = function () {
+          return fToBind.apply(this instanceof fNOP &amp;amp;&amp;amp; oThis
+                                 ? this
+                                 : oThis,
+                               aArgs.concat(Array.prototype.slice.call(arguments)));
+        };
+ 
+    fNOP.prototype = this.prototype;
+    fBound.prototype = new fNOP();
+ 
+    return fBound;
+  };
+}
+
+
 
 //返回指定区间的随机数
 Math.rndNum = function(min,max){
