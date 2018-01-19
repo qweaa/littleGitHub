@@ -4,6 +4,7 @@ Number.prototype.profixZero = function(n){
 		var str = new Array(n).join(0) + this;
 		return str.slice(-n);
 	}
+	return this;
 }
 
 //Function.prototype.bind()
