@@ -7,6 +7,27 @@ function getStyle(obj, name){
 		return getComputedStyle(obj, false)[name];	
 	}
 }
+//判断浏览器是否开启cookie
+if(document.cookie.indexOf("cookietest=") == -1) {     
+    //没有启用cookie
+    alert("没有启用cookie ");    
+} else{    
+    //已经启用cookie
+    alert("已经启用cookie ");    
+} 
+//设置cookie
+    function getCookie(name){
+        var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+        if(arr=document.cookie.match(reg))
+            return unescape(arr[2]);
+        else
+            return null;
+    }
+    function setCookie(name,value,time){
+        var exp = new Date();
+        exp.setTime(exp.getTime() + time*60*1000);
+        document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+    }
 //运动框架
 //function starMove(obj, json, fnEnd) {
 //	var timer=null;
