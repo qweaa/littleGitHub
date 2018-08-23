@@ -1,3 +1,26 @@
+//计算视频长度
+validateFile(file, callback) {
+    var video = document.createElement('video');
+    video.preload = 'metadata';
+    video.onloadedmetadata = ()=>{
+	window.URL.revokeObjectURL(video.src);
+	if (video.duration < 1) {
+	    console.log("Invalid Video! video is less than 1 second");
+	    if(callback) callback('视频少于1秒')
+	    return;
+	}
+	if(callback) callback(this.mathTime(Math.floor(video.duration)))
+    }
+    video.src = URL.createObjectURL(file);
+},
+//秒数格式化天时分秒
+mathTime(s){
+    var t = Math.floor(s / (24 * 60 * 60));
+    var h = Math.floor((s % (24 * 60 * 60)) / (60 * 60));
+    var m = Math.floor(((s % (24 * 60 * 60)) % (60 * 60)) / 60);
+    var s = Math.floor(((s % (24 * 60 * 60)) % (60 * 60)) % 60);
+    return (t?t+'天':'') + (h?h+'时':'') + (m?m+'分':'') + (s?s+'秒':'')
+},
 //获取url参数
 function getQueryString(name) {
 	var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
