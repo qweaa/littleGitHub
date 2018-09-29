@@ -1,11 +1,11 @@
 
 //检查对象中是否有空值
-hasNull(obj){
-	for(let i in obj){
-		if(typeof obj[i] === 'object') {if(this.hasNull(obj[i])) return true;}
-		else if(obj[i] === '') return true;
-	}
-	return false;
+hasNull(obj, elseArr = []){
+    for(let i in obj){
+	if(typeof obj[i] === 'object') {if(this.hasNull(obj[i])) return true;}
+	else if(!elseArr.includes(i) && obj[i] === '') return true;
+    }
+    return false;
 }
 //获取非行间样式
 function getStyle(obj, name){
