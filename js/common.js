@@ -1,3 +1,20 @@
+//复制
+copyStr(str) {
+    let inputDom = document.createElement('input')
+    inputDom.value = str
+    inputDom.style.position = 'fixed';
+    inputDom.style.top = '-100%';
+    document.body.appendChild(inputDom)
+    inputDom.select()
+    if(document.execCommand("copy")){
+	this.$message({
+	    showClose: true,
+	    message: "复制成功",
+	    type: "success"
+	});
+	document.body.removeChild(inputDom)
+    }
+},
 //计算视频长度
 validateFile(file, callback) {
     var video = document.createElement('video');
